@@ -18,8 +18,12 @@ const uploadRoutes = require('./routes/uploadRoutes');
 connectDB();
 
 const app = express();
+const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 
-app.use(cors());
+app.use(cors({
+  origin: CLIENT_URL,
+  credentials: true
+}));
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
